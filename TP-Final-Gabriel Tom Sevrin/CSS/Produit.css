@@ -1,0 +1,173 @@
+/* ------------------------------------- */
+/* ---  Page produits --- */
+/* ------------------------------------- */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap");
+
+/* --- Variables Globales --- */
+:root {
+  --neon-cyan: #00ffcc;
+  --primary-bg: #0a0a0a;
+  --secondary-bg: #1e1e1e;
+  --text-light: white;
+  --text-dark: #000000;
+  --spacing-xs: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-light);
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* --- Grille de Produits  --- */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- Carte Produit et Effets Néon --- */
+
+.product-card {
+  min-height: 550px;
+  background-color: var(--secondary-bg);
+  transition: box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.product-card:hover {
+  box-shadow: 0 0 30px var(--neon-cyan), 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn-neon {
+  box-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+  background-color: var(--neon-cyan);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+  background-color: var(--text-light);
+  color: var(--primary-bg);
+}
+
+.text-shadow-neon {
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc,
+    0 0 20px rgba(0, 255, 204, 0.5);
+}
+.text-shadow-title {
+  text-shadow: 0 0 2px #00ffcc, 0 0 5px rgba(0, 255, 204, 0.4);
+}
+.shadow-neon-tag {
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.2);
+}
+.neon-image-border {
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+}
+
+/* ------------------------------------- */
+/* --- Message Box (Pop-up Panier) --- */
+/* ------------------------------------- */
+
+#custom-message-box {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5000;
+  opacity: 0;
+  transition: bottom 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.5s ease-in-out;
+  pointer-events: none;
+
+  background-color: var(--secondary-bg);
+  border: 2px solid var(--neon-cyan);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 204, 0.4);
+  max-width: 400px;
+  width: 90%;
+}
+
+/* Affichage du message */
+#custom-message-box.show {
+  bottom: 40px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.message-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Image du Produit */
+.message-product-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 5px var(--neon-cyan);
+  flex-shrink: 0; /* Empêche l'image de se compresser */
+}
+
+.message-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.message-icon {
+  color: var(--neon-cyan);
+  font-size: 1.4rem;
+  margin-right: 10px;
+}
+
+#message-text {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+/* Petit message de confirmation */
+.confirmation-message {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  opacity: 0.8;
+  margin-top: 2px;
+}
