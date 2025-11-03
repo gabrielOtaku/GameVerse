@@ -136,3 +136,4 @@ echo '</footer>';
 
 echo '</div>'; // Fin de #nexus-chatbox
 echo '</div>'; // Fin de #nexus-ai-bubble
+
