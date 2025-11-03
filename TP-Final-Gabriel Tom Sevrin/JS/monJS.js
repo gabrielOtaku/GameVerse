@@ -131,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     searchBtn.addEventListener("click", (event) => {
       event.stopPropagation();
 
-      // Si la barre est déjà étendue
       if (searchContainer.classList.contains(CLASS_EXPANDED)) {
         // Si l'input N'EST PAS vide, on effectue la recherche ou la redirection
         if (searchInput.value.trim() !== "") {
@@ -164,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         !searchContainer.contains(event.target) &&
         searchContainer.classList.contains(CLASS_EXPANDED) &&
-        searchInput.value === "" // Se ferme seulement si l'input est vide
+        searchInput.value === ""
       ) {
         searchContainer.classList.remove(CLASS_EXPANDED);
       }
@@ -724,29 +723,36 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = formData.get("message");
 
       const destinationEmail = "gabrielherve94250@gmail.com";
+      showGlobalPopup(contactSuccessPopup);
 
-      // Envoi réel via PHP/Backend (simulé ici via fetch)
-      fetch("Contact.php", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            showGlobalPopup(contactSuccessPopup);
-            // Ouvrir le client de messagerie
-            const mailBody = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-            openMailClient(destinationEmail, subject, mailBody);
-            contactForm.reset();
-          } else {
-            showGlobalPopup(contactErrorPopup);
-          }
-        })
-        .catch((error) => {
-          console.error("Erreur d'envoi:", error);
-          showGlobalPopup(contactErrorPopup);
-        });
+      const mailBody = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+      openMailClient(destinationEmail, subject, mailBody);
+
+      contactForm.reset();
     });
+
+    //   // Envoi réel via PHP/Backend (simulé ici via fetch)
+    //   fetch("Contact.php", {
+    //     method: "POST",
+    //     body: formData,
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       if (data.success) {
+    //         showGlobalPopup(contactSuccessPopup);
+    //         // Ouvrir le client de messagerie
+    //         const mailBody = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    //         openMailClient(destinationEmail, subject, mailBody);
+    //         contactForm.reset();
+    //       } else {
+    //         showGlobalPopup(contactErrorPopup);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.error("Erreur d'envoi:", error);
+    //       showGlobalPopup(contactErrorPopup);
+    //     });
+    // });
   }
 
   // -------------------------------------------------------------
@@ -807,6 +813,23 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
         if (passwordInput) passwordInput.value = password;
+        playBotAnimation(ANIM_HAPPY);
+        showRegPopup(regSuccessPopup);
+        hideRegPopup(regErrorPopup);
+        playBotAnimation(ANIM_RECOVER);
+        if (regErrorDetails) regErrorDetails.innerHTML = "";
+        if (regErrorCloseBtn) regErrorCloseBtn.style.display = "none";
+        if (regSuccessCloseBtn) regSuccessCloseBtn.style.display = "none";
+        if (regErrorPopup) regErrorPopup.style.display = "none";
+        if (regSuccessPopup) regSuccessPopup.style.display = "none";
+        if (regErrorDetails) regErrorDetails.style.display = "none";
+        if (regErrorCloseBtn) regErrorCloseBtn.style.display = "none";
+        if (regSuccessCloseBtn) regSuccessCloseBtn.style.display = "none";
+        if (regErrorPopup) regErrorPopup.style.display = "none";
+        if (regSuccessPopup) regSuccessPopup.style.display = "none";
+
+        document.getElementById("mot_de_passe").value = password;
+        passwordSuggestionDiv.innerHTML = `Mot de passe suggéré : <strong>${password}</strong>`;
       });
     }
 
@@ -931,8 +954,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
-  // --- FIN DOMContentLoaded ---
 });
 
 // ----------------------------------------------------
