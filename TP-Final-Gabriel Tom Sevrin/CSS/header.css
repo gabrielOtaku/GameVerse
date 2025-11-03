@@ -141,7 +141,7 @@ body {
   transition: width 0.45s ease, opacity 0.3s ease;
 }
 
-.search-container.active .search-input {
+.search-container.expanded .search-input {
   width: 160px;
   opacity: 1;
 }
@@ -200,9 +200,9 @@ body {
   color: var(--text-dark);
 }
 
-.auth-container:hover .auth-menu {
+/* .auth-container:hover .auth-menu {
   display: flex;
-}
+} */
 
 /* === PARAMÈTRES POPUP === */
 #settings-popup-overlay {
