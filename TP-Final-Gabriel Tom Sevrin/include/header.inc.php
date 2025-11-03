@@ -50,7 +50,7 @@ echo '</div>'; // Fin de .nav-center-content
 echo '<div class="auth-container">';
 echo '<button class="auth-btn neon-button" id="auth-btn"><i class="fas fa-sign-in-alt"></i> Connexion</button>';
 echo '<div class="auth-menu" id="auth-menu">';
-echo '<a class="nav-link-transition" href="seConnexion.php">Se connecter</a>';
+echo '<a class="nav-link-transition" href="seConnecter.php">Se connecter</a>';
 echo '<a class="nav-link-transition" href="Inscription.php">S\'inscrire</a>';
 echo '</div>';
 echo '</div>'; // Fin de .auth-container
