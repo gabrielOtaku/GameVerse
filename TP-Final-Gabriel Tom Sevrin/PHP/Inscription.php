@@ -53,7 +53,6 @@ try {
             if ($file['size'] > 65536) {
                 $response['errors']['photo_profil'] = "La photo de profil ne doit pas dépasser 64 KB.";
             } else {
-                // Validation du type MIME
                 $allowed_mimes = ['image/jpeg', 'image/png', 'image/webp'];
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $mime_type = finfo_file($finfo, $file['tmp_name']);
@@ -71,17 +70,23 @@ try {
         if (empty($response['errors'])) {
             $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO User (Courriel, MotDePasse, Prenom, Nom, DateNaissance, Cellulaire, PhotoProfil, PhotoExt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO usager (idUsager, password, prenom, nom, dateNaiss, telephone, photoType, photoData) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $conn->prepare($sql);
 
+            // Types: ssssss (6 strings) + s (photoType) + b (photoData BLOB) -> 'sssssssb'
+            // Ceci corrige le problème d'ordre et de type BLOB de la requête.
+
             if ($photo_data !== null) {
-                $stmt->bind_param("sssssbss", $courriel, $mot_de_passe_hash, $prenom, $nom, $date_naissance, $cellulaire, $photo_data, $photo_ext);
-                $stmt->send_long_data(6, $photo_data);
+                $stmt->bind_param("sssssssb", $courriel, $mot_de_passe_hash, $prenom, $nom, $date_naissance, $cellulaire, $photo_ext, $photo_data);
+
+                $stmt->send_long_data(7, $photo_data);
             } else {
                 $photo_null = null;
                 $ext_null = null;
-                $stmt->bind_param("sssssbss", $courriel, $mot_de_passe_hash, $prenom, $nom, $date_naissance, $cellulaire, $photo_null, $ext_null);
+
+                // Si la photo est nulle, nous utilisons 's' pour tous les paramètres
+                $stmt->bind_param("ssssssss", $courriel, $mot_de_passe_hash, $prenom, $nom, $date_naissance, $cellulaire, $ext_null, $photo_null);
             }
 
             if ($stmt->execute()) {
@@ -114,7 +119,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 }
 
 // =========================================================
-// === PARTIE HTML / CSS / JS (Affichage de la page) ===
+// === PARTIE HTML : AFFICHAGE DU FORMULAIRE D'INSCRIPTION ===
 // =========================================================
 ?>
 <!DOCTYPE html>
@@ -173,8 +178,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             <div class="lg:w-1/3 w-full p-4 flex justify-center items-center h-[400px] lg:h-full mb-8 lg:mb-0 max-h-[600px] lg:order-1">
                 <model-viewer
                     id="bot-model"
-                    class="w-full h-full object-contain"
-                    src="../module/mon petit bot.glb"
+                    class="w-full h-full object-contain "
+                    src="../module/mon_petit_bot.glb"
                     alt="Nexus AI Bot de GameVerse"
                     ar
                     camera-controls
@@ -237,7 +242,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                             </div>
                             <div class="input-field">
                                 <label for="cellulaire" class="block mb-2 text-sm font-medium text-gray-300">Cellulaire (CAD)</label>
-                                <input type="tel" id="cellulaire" name="cellulaire" class="w-full p-3 rounded-md" placeholder="Format: 5145555555" required pattern="[0-9]{10}" title="Veuillez entrer 10 chiffres (sans tiret ni espace).">
+                                <input type="tel" id="cellulaire" name="cellulaire" class="w-full p-3 rounded-md" placeholder="Format: 514-555-5555" required pattern="[0-9]{3}[-\s]?[0-9]{3}[-\s]?[0-9]{4}" title="Format requis: 514-555-5555">
                                 <div class="error-txt" data-error-for="cellulaire">Format invalide (10 chiffres requis).</div>
                             </div>
                         </div>
