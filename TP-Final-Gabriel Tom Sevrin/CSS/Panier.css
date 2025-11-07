@@ -1,0 +1,19 @@
+/* ------------------------------------- */
+/* ---  Page Panier --- */
+/* ------------------------------------- */
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 4px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffcc,
+      0 0 40px rgba(0, 255, 204, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 8px #00ffcc, 0 0 15px #00ffcc, 0 0 30px #00ffcc,
+      0 0 60px rgba(0, 255, 204, 0.6);
+  }
+}
+
+.neon-text-animated {
+  animation: neon-pulse 1.5s ease-in-out infinite alternate;
+}
