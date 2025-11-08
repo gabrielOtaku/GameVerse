@@ -1,0 +1,194 @@
+/* TP-Final-Gabriel Tom Sevrin/CSS/Profil.css */
+
+/* --- Variables (assurez-vous qu'elles correspondent à header.css) --- */
+:root {
+  --neon-cyan: #00ffcc;
+  --dark-bg: #000000;
+  --card-bg: #1a1a1a;
+  --text-light: #e0f7ff;
+  --error-red: #ff4444;
+}
+
+.profil-container {
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto;
+}
+
+.profile-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
+  text-align: center;
+}
+
+.profile-card h2 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
+}
+
+/* --- Section Avatar --- */
+.profile-avatar-section {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.profile-main-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  transition: all 0.3s;
+}
+
+.profile-main-avatar:hover {
+  box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 204, 0.5);
+}
+
+.edit-photo-btn {
+  position: absolute;
+  bottom: 5px;
+  right: -10px;
+}
+
+/* Bouton Néon de petite taille (réutilisable) */
+.neon-btn-small {
+  background-color: var(--neon-cyan);
+  color: var(--dark-bg);
+  padding: 6px 12px;
+  border-radius: 15px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.6);
+  transition: all 0.3s;
+}
+.neon-btn-small:hover {
+  background-color: #fff;
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* --- Formulaire et Champs --- */
+#profile-form {
+  text-align: left;
+  display: grid;
+  gap: 15px;
+}
+
+.input-field-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field-profile label {
+  color: var(--neon-cyan);
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+
+.input-field-profile input {
+  background-color: var(--dark-bg);
+  border: 1px solid rgba(0, 255, 204, 0.3);
+  color: var(--text-light);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Champ en lecture seule */
+.item-readonly {
+  background-color: #0f0f0f !important; /* Rendu légèrement plus sombre */
+  color: #999 !important;
+  border-style: dashed !important;
+  cursor: default;
+}
+
+/* Champ éditable (activé par JS) */
+.item-editable {
+  border-color: var(--neon-cyan) !important;
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+}
+.item-editable:focus {
+  outline: none;
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* --- Boutons d'action --- */
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.profile-actions button {
+  flex-grow: 1;
+  padding: 12px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+}
+
+.neon-btn {
+  background-color: var(--neon-cyan);
+  color: var(--dark-bg);
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+.neon-btn:hover {
+  background-color: #fff;
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* Style spécifique pour le bouton Enregistrer */
+#save-profile-btn:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.neon-btn-secondary {
+  background: none;
+  color: var(--error-red);
+  border: 1px solid var(--error-red);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.neon-btn-secondary:hover {
+  background-color: rgba(255, 68, 68, 0.1);
+  box-shadow: 0 0 8px var(--error-red);
+}
+
+/* Masquer les éléments */
+.hidden {
+  display: none !important;
+}
+
+/* Media Queries (Réactivité) */
+@media (max-width: 500px) {
+  .profile-card {
+    padding: 20px;
+  }
+  .profile-card h2 {
+    font-size: 1.5rem;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+}

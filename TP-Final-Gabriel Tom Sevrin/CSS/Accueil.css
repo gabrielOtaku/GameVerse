@@ -1,0 +1,156 @@
+/* ------------------------------------- */
+/* --- Carrousel d'Accueil --- */
+/* ------------------------------------- */
+
+/* S'assurer que les images principales du carrousel remplissent bien leur conteneur */
+.carousel-inner {
+  height: 60vh; /* Ajustez cette hauteur selon vos besoins */
+  min-height: 400px;
+  border-radius: 12px;
+}
+
+.carousel-inner .carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  text-align: left;
+}
+
+.carousel-caption h5 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.carousel-caption p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.1rem;
+  max-width: 600px;
+  color: #f0f0f0;
+}
+
+/* --- Indicateurs de Contrôle (Flèches) --- */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 15px;
+  transition: background-color 0.2s;
+}
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ------------------------------------- */
+/* --- Miniatures Intégrées (CSS) --- */
+/* ------------------------------------- */
+
+.carousel-thumbnails-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.thumbnail-item {
+  /* Dimensions claires pour résoudre le problème de miniature */
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+  box-shadow: none;
+
+  /* Correction: S'assurer que le navigateur traite cet élément comme un bloc pour les dimensions */
+  display: block;
+}
+
+/* Style au survol */
+.thumbnail-item:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Style de la miniature active */
+/* Le JavaScript mettra à jour l'ombre et la bordure pour la couleur néon dynamique */
+.thumbnail-item.active {
+  opacity: 1;
+
+  /* Utilise la variable CSS définie ou un fallback */
+  border-color: var(--neon-cyan, #00ffcc);
+  box-shadow: 0 0 10px var(--neon-cyan, rgba(0, 255, 204, 0.8));
+  animation: scale-up-bounce 0.3s forwards;
+}
+
+@keyframes scale-up-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================================================= */
+/* === AJOUT CRITIQUE pour l'Overlay de Prévisualisation du Carrousel (FIX 2) === */
+/* ========================================================= */
+
+#carousel-preview-overlay {
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  z-index: 9999;
+  background: rgba(17, 17, 17, 0.9); /* #111a */
+  border: 2px solid var(--neon-cyan, #00ffcc);
+  border-radius: 9px;
+  box-shadow: 0 2px 18px rgba(0, 255, 204, 0.5); /* #00ffcc80 */
+  padding: 8px;
+  pointer-events: show;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  display: inline-block;
+  text-align: center;
+  max-width: 180px;
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.9rem;
+}
+
+#carousel-preview-overlay img {
+  display: block;
+  width: 180px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+#carousel-preview-overlay .preview-caption {
+  margin-top: 6px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  color: #00ffcc;
+  text-align: center;
+}
