@@ -1,0 +1,201 @@
+/* ========================================================= */
+/* === SÉLECTEURS GLOBALS DE LA PAGE PANIER === */
+/* ========================================================= */
+
+.panier-wrapper {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  min-height: 100vh;
+}
+
+/* Conteneur principal  */
+.glass-panel {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 40px;
+}
+
+/* Message de panier vide */
+.empty-msg {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  padding: 30px;
+  border: 1px dashed var(--neon-pink);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* ========================================================= */
+/* === TABLEAU DU PANIER === */
+/* ========================================================= */
+
+.table-panier {
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Entête du tableau */
+.table-panier thead th {
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-cyan);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--neon-cyan);
+  padding-bottom: 15px;
+  font-weight: 700;
+}
+
+/* Corps du tableau  */
+.table-panier tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table-panier tbody tr:hover {
+  background-color: rgba(0, 255, 204, 0.05);
+}
+
+.table-panier tbody td {
+  padding: 15px 12px;
+  vertical-align: middle;
+}
+
+/* Colonne Produit */
+.col-produit {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.col-produit img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--neon-cyan);
+  margin-right: 15px;
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+}
+
+/* Champ de quantité */
+.form-qty input[type="number"] {
+  background-color: var(--primary-bg);
+  border: 1px solid var(--neon-cyan);
+  color: var(--text-light);
+  border-radius: 4px;
+  padding: 5px 8px;
+  text-align: center;
+  width: 60px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-qty input[type="number"]:focus {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 8px rgba(255, 0, 170, 0.5);
+  outline: none;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--neon-pink);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.btn-delete:hover {
+  color: #ff3366;
+  transform: scale(1.1);
+}
+
+.panier-footer {
+  padding-top: 20px;
+}
+
+.panier-footer h3 {
+  font-size: 1.8rem;
+}
+.panier-footer .text-neon-cyan {
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+/* ========================================================= */
+/* === ACCÈS RESTREINT (si non connecté) === */
+/* ========================================================= */
+
+.restricted-access-box {
+  text-align: center;
+}
+
+.restricted-access-box h2 {
+  color: var(--neon-pink);
+}
+
+/* ========================================================= */
+/* === RESPONSIVE === */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+  .glass-panel {
+    padding: 20px;
+  }
+
+  .table-panier thead {
+    display: none;
+  }
+  .table-panier tbody,
+  .table-panier tr,
+  .table-panier td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-panier tr {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border: 1px solid var(--secondary-bg);
+    border-radius: 8px;
+  }
+
+  .table-panier td {
+    text-align: right !important;
+    padding: 8px 10px;
+    position: relative;
+  }
+
+  .table-panier td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  .col-produit {
+    justify-content: flex-end;
+    text-align: right;
+  }
+  .col-produit img {
+    margin-left: 10px;
+    margin-right: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .panier-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .panier-footer h3 {
+    font-size: 1.5rem;
+  }
+}

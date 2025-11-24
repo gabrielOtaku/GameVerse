@@ -1,0 +1,78 @@
+.popup-overlay-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.popup-overlay-custom.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content-custom {
+  background: var(--primary-bg);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 255, 204, 0.9);
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: transform 0.4s ease;
+}
+
+.popup-overlay-custom.show .popup-content-custom {
+  transform: scale(1);
+}
+
+.mail-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.mail-link:hover {
+  transform: scale(1.05);
+}
+
+.gmail-link {
+  background-color: #d93025;
+  color: white;
+}
+.outlook-link {
+  background-color: #0078d4;
+  color: white;
+}
+.yahoo-link {
+  background-color: #500095;
+  color: white;
+}
+
+.success-icon {
+  animation: pulse-neon 1.5s infinite alternate;
+  color: var(--neon-cyan);
+}
+
+@keyframes pulse-neon {
+  from {
+    text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+  }
+  to {
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan),
+      0 0 30px var(--neon-cyan);
+  }
+}
